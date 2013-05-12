@@ -5,9 +5,26 @@
     <meta charset="utf-8" />
     <title>Comicify</title>
 </head>
-<body>
+    <body>
+        <h3>Sub Folders</h3>    
+        <ul data-bind="template: { name: 'folder-template', foreach: Folders }"></ul>
+        <h3>Comics</h3>
+        <ul data-bind="template: { name: 'comic-template', foreach: Comics }"></ul>
+        
+        <div>
+            <img data-bind="attr: {src: CurrentPagePath}"/>
+        </div>
+
+        <script type="text/html" id="folder-template">
+            <li><a href="#" class="FolderLink" data-bind="text: Name, attr: {'data-fullPath': Path}"></a></li>
+        </script>
     
-    <script language="javascript" type="text/javascript" src="jquery-2.0.0.min.js"></script>
-    <script language="javascript" type="text/javascript" src="knockout-2.2.1.js"></script>
-</body>
+        <script type="text/html" id="comic-template">
+            <li><a href="#" class="ComicLink" data-bind="text: Name, attr: {'data-fullPath': Path}"></a></li>
+        </script>
+
+        <script language="javascript" type="text/javascript" src="jquery-2.0.0.min.js"></script>
+        <script language="javascript" type="text/javascript" src="knockout-2.2.1.js"></script>
+        <script language="javascript" type="text/javascript" src="comicify.js"></script>
+    </body>
 </html>

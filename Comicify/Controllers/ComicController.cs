@@ -4,14 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Comicify.Data;
 
 namespace Comicify.Controllers
 {
     public class ComicController : ApiController
     {
-        public IEnumerable<string> Get()
+        private IComicRepository _comicRepository = new ComicRepository();
+        
+        public IEnumerable<string> Get(string[] path)
         {
-            return new List<string> {"rar", "boo"};
+            throw new NotImplementedException();
         }
+
     }
 }
