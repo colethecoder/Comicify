@@ -53,7 +53,7 @@ namespace Comicify
                 new {controller = "Web", action = "GetFile", filename = RouteParameter.Optional});               
 
             config.Routes.MapHttpRoute(
-                "API Default", "api/{controller}/{id}",
+                "API Default", "api/{controller}/{*path}",
                 new {id = RouteParameter.Optional});
 
             using (HttpSelfHostServer server = new HttpSelfHostServer(config))

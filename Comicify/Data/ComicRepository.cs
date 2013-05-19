@@ -15,8 +15,8 @@ namespace Comicify.Data
             var content = new FolderContent();
             content.Path = path;
             content.Folders = (from directory in Directory.GetDirectories(path) select new Folder{Path = directory, Name = directory.Split('\\').Last()}).ToList();
-            content.Comics = (from file in Directory.GetFiles(path, "*.cbr") select new Comic { Path = file, Name = file.Split('\\').Last().Split('.').First() }).ToList();
-            content.Comics.AddRange(from file in Directory.GetFiles(path, "*.cbz") select new Comic { Path = file });
+            content.Comics = (from file in Directory.GetFiles(path, "*.cbr") select new Comic { Path = file, Name = file.Split('\\').Last() }).ToList();
+            content.Comics.AddRange(from file in Directory.GetFiles(path, "*.cbz") select new Comic { Path = file, Name = file.Split('\\').Last() });
             return content;
         }
     }

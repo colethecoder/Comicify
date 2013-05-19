@@ -1,24 +1,29 @@
-﻿var ViewModel = {
-    Path: ko.observable(''),
-    Folders: ko.observableArray(),
-    Comics: ko.observableArray(),
-    SelectedComicPath: ko.observable(''),
-    CurrentPageNumber: ko.observable(1),
-    CurrentPagePath: ko.observable('')
+﻿function ViewModel() {
+    this.Path = ko.observable('');
+    this.Folders = ko.observableArray();
+    this.Comics = ko.observableArray();
+    this.SelectedComicPath = ko.observable('');
+    this.CurrentPageNumber = ko.observable(1);
+    this.CurrentPagePath = ko.observable('');
+    this.fullName = ko.computed(function () {
+        return this.firstName() + " " + this.lastName();
+    }, this);
 };
 
 $(function () {
     $("body").on('click', '.FolderLink', function (event) {
-        alert('yoyo1');
         ViewModel.Path($(this).attr('data-fullPath'));
     });
+    
+    $("body").on('click', '.ComicLink', function (event) {
+        ViewModel.SelectedComicPath($(this).attr('data-fullPath'));
+    });
 
-    ko.applyBindings(ViewModel);
+    ko.applyBindings(new ViewModel());
     LoadFolderContent();
 });
 
 ViewModel.Path.subscribe(function (newValue) {
-    alert('yoyo');
     LoadFolderContent();
 });
 
