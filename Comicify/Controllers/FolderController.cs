@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,15 +12,14 @@ namespace Comicify.Controllers
     public class FolderController : ApiController
     {
         private IComicRepository _comicRepository = new ComicRepository();
+        private ConfigRepository _configRepository = new ConfigRepository();
         
         public FolderContent Get(string path = null)
         {
-            if (string.IsNullOrWhiteSpace(path))
-            {
-                path = ConfigurationSettings.AppSettings["ParentFolder"];
-            }
+            path = _configRepository.GetRootFolderFromConfig() + (path == null ? string.Empty : path.Replace('/', '\\'));
+            
             return _comicRepository.GetFolderContent(path);
-        }
+        }        
 
     }
 }

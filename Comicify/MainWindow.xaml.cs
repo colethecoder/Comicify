@@ -54,7 +54,7 @@ namespace Comicify
 
             config.Routes.MapHttpRoute(
                 "API Default", "api/{controller}/{*path}",
-                new {id = RouteParameter.Optional});
+                new {path = RouteParameter.Optional});
 
             using (HttpSelfHostServer server = new HttpSelfHostServer(config))
             {

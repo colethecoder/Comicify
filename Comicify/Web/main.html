@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Comicify</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <style type="text/css">
+    	html, body {
+    		height: 100%;
+    		margin: 0;
+    	}
+
+    	#wrapper {
+    		min-height: 100%; 
+    	}
+    </style>
+    <!--[if lte IE 6]>
+    <style type="text/css">
+    	#container {
+    		height: 100%;
+    	}
+    </style>
+    <![endif]-->
+</head>
+    <body class="comicContainer" style="background-color: green;">
+        <div data-bind="ifnot: ComicSelected">
+            <h3>Sub Folders</h3>    
+            <ul data-bind="template: { name: 'folder-template', foreach: Folders }"></ul>
+            <h3>Comics</h3>
+            <ul data-bind="template: { name: 'comic-template', foreach: Comics }"></ul>
+        </div>
+        <div data-bind="if: ComicSelected" style="background-color: pink;" id="wrapper">
+            <img id="comicPage" data-bind="attr: {src: CurrentPagePath}"/>
+        </div>
+
+        <script type="text/html" id="folder-template">
+            <li><a href="#" class="FolderLink" data-bind="text: Name, click: $parent.navigateToFolder"></a></li>
+        </script>
+    
+        <script type="text/html" id="comic-template">
+            <li><a href="#" class="ComicLink" data-bind="text: Name, click: $parent.selectComic"></a></li>
+        </script>
+
+        <script language="javascript" type="text/javascript" src="jquery-2.0.0.min.js"></script>
+        <script language="javascript" type="text/javascript" src="knockout-2.2.1.js"></script>
+        <script language="javascript" type="text/javascript" src="comicify.js"></script>
+        <script language="javascript" type="text/javascript" src="imgscale.js"></script>
+    </body>
+</html>
