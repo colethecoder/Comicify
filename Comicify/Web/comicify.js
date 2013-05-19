@@ -7,6 +7,14 @@
     self.ComicSelected = ko.observable(false);
     self.CurrentPageNumber = ko.observable(1);
 
+    self.NextPage = function () {
+        self.CurrentPageNumber(self.CurrentPageNumber() + 1);        
+    };
+    
+    self.PreviousPage = function () {
+        self.CurrentPageNumber(self.CurrentPageNumber() - 1);
+    };
+
     self.navigateToFolder = function (folder) {
         console.log(folder.Path);
         self.Path(folder.Path);
@@ -43,17 +51,26 @@
     self.LoadFolderContent();
 };
 
+var viewModel = new ViewModel();
+
 $(function () {
-    ko.applyBindings(new ViewModel());
-    $('#comicPage').imgscale({
-        parent: '.comicContainer',
-        scale: 'fit',
-        
+    ko.applyBindings(viewModel);
+    
+    $('#comic').on("swipeleft","#comicPage", function (event) {
+        viewModel.NextPage();
     });
+    
+    $('#comic').on("swiperight", "#comicPage", function (event) {
+        viewModel.PreviousPage();
+    });
+
+    ResizeImage();
     
     $(window).resize(function () {
         ResizeImage();
     });
+    
+
 });
 
 function ResizeImage() {
@@ -68,3 +85,7 @@ window.addEventListener("load", function () {
         window.scrollTo(0, 1);
     }, 0);
 });
+
+
+
+
