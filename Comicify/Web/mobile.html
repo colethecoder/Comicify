@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <link rel="apple-touch-icon" href="apple-touch-icon-57x57.png" />
+    <!--<link rel="apple-touch-icon" href="apple-touch-icon-57x57.png" />
     <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
     <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png" />
     <link rel="apple-touch-startup-image" href="apple-touch-startup-image-320x460.png" />
-    <link rel="apple-touch-startup-image" sizes="768x1004" href="apple-touch-startup-image-768x1004.png" />
+    <link rel="apple-touch-startup-image" sizes="768x1004" href="apple-touch-startup-image-768x1004.png" />-->
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
@@ -18,18 +18,21 @@
 </head> 
 <body> 
 
-    <div data-role="page">
+    <div data-role="page" id="navigation">
 
-	<div data-role="header">
-		<h1>Nav</h1>
-	</div><!-- /header -->
+        <div data-role="header">
+            <!-- ko ifnot: Root -->	
+            <a href="#" data-icon="arrow-l" data-bind="click: navigateBack">Back</a>
+            <!-- /ko -->
+            <h1>Edit Contact</h1>	
+        </div><!-- /header -->
 
         <div data-role="content">
             <!-- ko ifnot: ComicSelected -->	
-            <h3>Sub Folders</h3>    
-            <ul data-bind="template: { name: 'folder-template', foreach: Folders }"></ul>
-            <h3>Comics</h3>
-            <ul data-bind="template: { name: 'comic-template', foreach: Comics }"></ul>	
+            <h1>Sub Folders</h1>    
+            <ul data-role="listview" data-bind="template: { name: 'folder-template', foreach: Folders }"></ul>
+            <h1>Comics</h1>
+            <ul data-role="listview" data-bind="template: { name: 'comic-template', foreach: Comics }"></ul>	
             <!-- /ko -->
         </div><!-- /content -->
 
@@ -39,7 +42,7 @@
 
         <div data-role="content" style="background-color: black">
             <!-- ko if: ComicSelected -->		
-            <img id="comicPage" data-bind="attr: {src: CurrentPagePath}"/>		
+            <img id="comicPage" data-bind="attr: {src: CurrentPagePath}" style="margin: 0 auto; display: block;padding:0;"/>		
             <!-- /ko -->
         </div><!-- /content -->
 
