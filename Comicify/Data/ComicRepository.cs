@@ -30,9 +30,13 @@ namespace Comicify.Data
         public Stream GetComicPage(string path, int page)
         {
             path = _configRepository.GetRootFolderFromConfig() + (path == null ? string.Empty : path.Replace('/', '\\'));
-
             var zip = ArchiveFactory.Open(path);
-            var pageEntry = zip.Entries.Where(x=>!x.IsDirectory).OrderBy(x => x.FilePath).ElementAt(page-1);
+            var allPageEntries = zip.Entries.Where(x => !x.IsDirectory).OrderBy(x => x.FilePath);
+            if (page > allPageEntries.Count())
+            {
+                page = allPageEntries.Count();
+            }
+            var pageEntry = allPageEntries.ElementAt(page-1);
             var stream = new MemoryStream();            
             pageEntry.WriteTo(stream);
             stream.Position = 0;

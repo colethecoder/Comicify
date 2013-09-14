@@ -57,7 +57,7 @@ namespace Comicify
                 new {path = RouteParameter.Optional});
 
             using (HttpSelfHostServer server = new HttpSelfHostServer(config))
-            {
+            {                
                 server.OpenAsync().Wait();
                 while (true)
                 {

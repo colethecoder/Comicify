@@ -52,7 +52,7 @@
 
     self.LoadFolderContent = function () {
         if (!self.ModeSwitch()) {
-            $.getJSON('../api/Folder/' + self.Path(), null, function(data) {
+            $.getJSON('../api/Folder/' + self.Path(), null, function (data) {
                 self.Folders(data.Folders);
                 self.Comics(data.Comics);
             });
@@ -61,6 +61,22 @@
 
     self.CurrentPagePath = ko.computed(function() {
         return '../api/Comic/' + self.Path() + '?page=' + self.CurrentPageNumber();
+    }, this);
+    
+    self.CurrentPagePathMinus1 = ko.computed(function () {
+        return '../api/Comic/' + self.Path() + '?page=' + (self.CurrentPageNumber() == 1 ? 1 : self.CurrentPageNumber() -1);
+    }, this);
+    
+    self.CurrentPagePathMinus2 = ko.computed(function () {
+        return '../api/Comic/' + self.Path() + '?page=' + (self.CurrentPageNumber() > 2 ? self.CurrentPageNumber() - 2 : 1);
+    }, this);
+
+    self.CurrentPagePathPlus1 = ko.computed(function () {
+        return '../api/Comic/' + self.Path() + '?page=' + (self.CurrentPageNumber() + 1);
+    }, this);
+    
+    self.CurrentPagePathPlus2 = ko.computed(function () {
+        return '../api/Comic/' + self.Path() + '?page=' + (self.CurrentPageNumber() + 2);
     }, this);
     
     self.PreviousPath = ko.computed(function () {
